@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body onload="counter();">
+    <script>
+
+        let timer = 0;
+        function update() {
+            console.log(`counting time : ${timer}s`);
+            timer++;
+        }
+
+        function counter() {
+            animeInter = setInterval(update, 1000);
+        }
+
+        // testing
+        /*
+        function outside(func){
+            func();
+            console.log('outside func');
+        }
+        function inside(x){
+            console.log('inside func' + x);
+        }
+        outside(inside);
+        */
+        // function不寫'()'才是function本身
+    </script>
+</body>
+
+</html>
