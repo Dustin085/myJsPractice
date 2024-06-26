@@ -7,18 +7,52 @@
     <title>Document</title>
 </head>
 
-<body onload="counter();">
+<body>
+
+    <span id="timerH">已經經過了0秒</span>
+    <hr>
+    <button id="startBtn">開始計時</button>
+    <br>
+    <button id="stopBtn">暫停計時</button>
+    <br>
+    <button id="resetBtn">重置計時</button>
+
     <script>
 
+        // 變數區
         let timer = 0;
+        let timerInterId;
+        let startBtnEle = document.getElementById('startBtn');
+        let stopBtnEle = document.getElementById('stopBtn');
+        let resetBtnEle = document.getElementById('resetBtn');
+
+        // function區
         function update() {
-            console.log(`counting time : ${timer}s`);
             timer++;
+            console.log(`counting time : ${timer}s`);
+            let timerOputEle = document.getElementById('timerH');
+            timerOputEle.innerHTML = `已經經過了${timer}秒`;
         }
 
-        function counter() {
-            animeInter = setInterval(update, 1000);
+        function startTimer() {
+            timerInterId = setInterval(update, 1000);
         }
+
+        function stopTimer() {
+            clearInterval(timerInterId);
+        }
+
+        function resetTimer() {
+            timer = 0;
+            let timerOputEle = document.getElementById('timerH');
+            timerOputEle.innerHTML = `已經經過了${timer}秒`;
+            stopTimer();
+        }
+
+        // EventListener區
+        startBtnEle.addEventListener("click", startTimer);
+        stopBtnEle.addEventListener("click", stopTimer);
+        resetBtnEle.addEventListener("click", resetTimer);
 
         // testing
         /*
