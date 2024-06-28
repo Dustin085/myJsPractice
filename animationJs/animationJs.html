@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <span id="timerH">已經經過了0秒</span>
+    <hr>
+    <button id="startBtn">開始計時</button>
+    <br>
+    <button id="stopBtn">暫停計時</button>
+    <br>
+    <button id="resetBtn">重置計時</button>
+
+    <script>
+
+        // 變數區
+        let timer = 0;
+        let timerInterId;
+        let startBtnEle = document.getElementById('startBtn');
+        let stopBtnEle = document.getElementById('stopBtn');
+        let resetBtnEle = document.getElementById('resetBtn');
+
+        // function區
+        function update() {
+            timer++;
+            console.log(`counting time : ${timer}s`);
+            let timerOputEle = document.getElementById('timerH');
+            timerOputEle.innerHTML = `已經經過了${timer}秒`;
+        }
+
+        function startTimer() {
+            timerInterId = setInterval(update, 1000);
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterId);
+        }
+
+        function resetTimer() {
+            timer = 0;
+            let timerOputEle = document.getElementById('timerH');
+            timerOputEle.innerHTML = `已經經過了${timer}秒`;
+            stopTimer();
+        }
+
+        // EventListener區
+        startBtnEle.addEventListener("click", startTimer);
+        stopBtnEle.addEventListener("click", stopTimer);
+        resetBtnEle.addEventListener("click", resetTimer);
+
+        // testing
+        /*
+        function outside(func){
+            func();
+            console.log('outside func');
+        }
+        function inside(x){
+            console.log('inside func' + x);
+        }
+        outside(inside);
+        */
+        // function不寫'()'才是function本身
+    </script>
+</body>
+
+</html>
