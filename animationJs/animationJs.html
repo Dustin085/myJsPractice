@@ -17,25 +17,47 @@
     <br>
     <button id="resetBtn">重置計時</button>
 
+    <div class="timerKun">
+        <pre>
+        \          /
+         \        /
+          \      /
+         ----------
+        |          |
+        |  o    o  |
+        |          |
+        |    <span id="timrKunNum">0s</span>    |
+        |          |
+         ----------
+           |    |   
+           |    |
+           --   --
+        </pre>
+    </div>
+
     <script>
 
         // 變數區
-        let timer = 0;
+        let timer = 0; // 現正計時
         let timerInterId;
+        let intervalMut = 1; // 若此值等於1，則interval為1000 ms
+
+        // 抓btn
         let startBtnEle = document.getElementById('startBtn');
         let stopBtnEle = document.getElementById('stopBtn');
         let resetBtnEle = document.getElementById('resetBtn');
 
         // function區
         function update() {
-            timer++;
+            timer += 1 * intervalMut;
             console.log(`counting time : ${timer}s`);
             let timerOputEle = document.getElementById('timerH');
-            timerOputEle.innerHTML = `已經經過了${timer}秒`;
+            timerOputEle.innerHTML = `已經經過了${removeExtraZero(timer.toFixed(2))}秒`;
+            document.getElementById('timrKunNum').innerHTML = `${removeExtraZero(timer.toFixed(2))}s`;
         }
 
         function startTimer() {
-            timerInterId = setInterval(update, 1000);
+            timerInterId = setInterval(update, 1000 * intervalMut);
         }
 
         function stopTimer() {
@@ -46,7 +68,16 @@
             timer = 0;
             let timerOputEle = document.getElementById('timerH');
             timerOputEle.innerHTML = `已經經過了${timer}秒`;
+            document.getElementById('timrKunNum').innerHTML = `${timer}s`;
             stopTimer();
+        }
+
+        function removeExtraZero(num) {
+            if (num % 1 == 0) {
+                return Math.round(num);
+            } else {
+                return num;
+            }
         }
 
         // EventListener區
