@@ -45,3 +45,18 @@ a {
 pre {
     font-family: monospace;
 }
+
+/* class */
+
+.banner {
+    display: flex;
+    
+}
+
+.container-tKun{
+    width: 50%;
+}
+
+.tKunZone {
+    display: flex;
+}
