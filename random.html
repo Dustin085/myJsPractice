@@ -6,26 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>終極午餐選擇器</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             background-color: rgb(199, 175, 204);
+
+        }
+
+        header {
+            height: 30vh;
+        }
+
+        #theUltFoodChooser {
+            /* margin-top: 30vh; */
+            height: 30vh;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: space-around;
         }
 
         h1 {
-            margin-top: 40vh;
+            /* margin-top: 40vh; */
         }
 
         h1 {
+            font-size: 35px;
             background-image: linear-gradient(135deg, rgba(166, 188, 205, 0.5), rgba(214, 233, 230, 0.5), rgba(166, 188, 205, 0.5));
             border-radius: 20px;
             border: solid 1px rgb(119, 119, 119);
             padding: 8px;
         }
 
-        h2{
-            /* font-size: 45px; */
+        h2 {
+            font-size: 30px;
             text-decoration: none;
             position: relative;
             transition: .35s ease-in-out;
@@ -36,7 +54,26 @@
             overflow: hidden;
             background-repeat: no-repeat;
             -webkit-text-fill-color: transparent;
-            animation: shinText 1.3s infinite;
+            animation: shinText 3s infinite;
+        }
+
+        .btn-box {
+            display: flex;
+        }
+
+        button {
+            background-image: linear-gradient(135deg, rgb(245, 245, 245), rgb(212, 212, 212));
+            background-color: transparent;
+            border: solid .5px rgb(107, 107, 107);
+            font-size: 20px;
+            border-radius: 10px;
+            padding: 5px 20px;
+            margin-left: 5px;
+            transition: .35s;
+        }
+
+        button:hover{
+            background-image: linear-gradient(135deg, rgb(216, 216, 216), rgb(186, 186, 186));
         }
 
         @keyframes shinText {
@@ -52,45 +89,40 @@
 </head>
 
 <body>
-    <h1>終極午餐選擇器</h1>
-    <h2 id="foodText"></h2>
+    <header></header>
+    <main>
+
+        <section id="theUltFoodChooser">
+            <h1>終極午餐選擇器</h1>
+            <h2 id="foodText">今天要吃...?</h2>
+            <div class="btn-box">
+                <button id="startBtn">開始</button>
+                <button id="stopBtn">停止</button>
+            </div>
+        </section>
+
+    </main>
+
+
     <script>
-        // let foodArr = [];
-        // let bingoNum = Math.floor(Math.random() * 100); // 0-99
-
-        // let input = Number(prompt('隨便輸入0-99的數字'));
-        // if (input > bingoNum) {
-        //     // 0
-        //     if (input >= 25) {
-        //         // 1
-        //     } else {
-        //         // 2
-        //     }
-        // } else {
-        //     // 3
-        // }
-
         let foodArr = ['飯', '麵', '餃子', '垃圾食物'];
         let randomNum = Math.floor(Math.random() * foodArr.length);
 
+        // 取得html元素
         let foodTextEle = document.getElementById('foodText');
-        // foodTextEle.innerHTML = `今天吃:${foodArr[randomNum]}！`;
+        let startBtnEle = document.getElementById('startBtn');
+        let stopBtnEle = document.getElementById('stopBtn');
 
-        let foodRollId = setInterval(() => {
-            foodTextEle.innerHTML = `今天吃:${foodArr[Math.floor(Math.random() * foodArr.length)]}！`
-        }, 50);
+        let foodRollId = 0;
+        startBtnEle.addEventListener("click", function (event) {
+            foodRollId = setInterval(() => {
+                foodTextEle.innerHTML = `今天吃:${foodArr[Math.floor(Math.random() * foodArr.length)]}！`
+            }, 50);
+        });
 
-
-        setTimeout(() => {
+        stopBtnEle.addEventListener("click", function (event) {
             clearInterval(foodRollId);
-            // foodRollId = null;
-        }, 3000);
-
-
-
-        // foodTextEle.innerHTML = `今天吃:${foodArr[randomNum]}！`;
-
-        // document.write(`今天吃:${foodArr[randomNum]}！`);
+        });
     </script>
 </body>
 
